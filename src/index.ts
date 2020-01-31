@@ -1,21 +1,32 @@
-import "reflect-metadata";
-import {createConnection} from "typeorm";
-import {User} from "./entity/User";
+import 'reflect-metadata';
+import { createConnection } from 'typeorm';
+import { ApolloServer } from 'apollo-server-express';
+import Express, { Application } from 'express';
+import typeDefs from './typeDefs';
+import resolvers from './resolvers';
 
-createConnection().then(async connection => {
+createConnection()
+  .then(async () => {
+    const app: Application = Express();
+    const apollo = new ApolloServer({
+      typeDefs,
+      resolvers,
+      context: params => ({ ...params }),
+    });
 
-    console.log("Inserting a new user into the database...");
-    const user = new User();
-    user.firstName = "Timber";
-    user.lastName = "Saw";
-    user.age = 25;
-    await connection.manager.save(user);
-    console.log("Saved a new user with id: " + user.id);
+    apollo.applyMiddleware({
+      app,
+      cors: {
+        origin: 'http://localhost:3000',
+      },
+    });
 
-    console.log("Loading users from the database...");
-    const users = await connection.manager.find(User);
-    console.log("Loaded users: ", users);
-
-    console.log("Here you can setup and run express/koa/any other framework.");
-
-}).catch(error => console.log(error));
+    app.listen(3000, () => {
+      console.log('🚀  - 서버가 준비되었어요.');
+    });
+  })
+  .catch(err => {
+    console.log('❌  - 오류가 발생했어요.');
+    console.log('❌  -', err.message);
+    process.exit(1);
+  });
