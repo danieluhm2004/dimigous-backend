@@ -14,7 +14,7 @@ jobs:
       - name: Docker Image Build.
         uses: mr-smithers-excellent/docker-build-push@v2
         with:
-          image: docker.clou.delivery/dimigo-asked
+          image: dimigo-asked
           tag: latest
           registry: docker.clou.delivery
           dockerfile: Dockerfile
