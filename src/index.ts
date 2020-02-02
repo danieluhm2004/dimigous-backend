@@ -5,6 +5,7 @@ import { ApolloServer } from 'apollo-server-express';
 import typeDefs from './typeDefs';
 import resolvers from './resolvers';
 import AWS from 'aws-sdk';
+import os from 'os';
 
 if (process.env.NODE_ENV === 'development') DotEnv.config();
 const app: Application = Express();
@@ -30,6 +31,12 @@ Mongoose.connection.once('connected', () => {
     context: (params: any) => ({ ...params }),
   });
 
+  app.disable('x-powered-by');
+  app.use((req: any, res: any, next: any) => {
+    res.setHeader('X-Cluster-Id', os.hostname());
+    next();
+  });
+
   apollo.applyMiddleware({
     app,
     cors: {
@@ -41,7 +48,9 @@ Mongoose.connection.once('connected', () => {
   });
 
   app.listen(process.env.PORT || 3000, () => {
-    console.log('🚀  - 서버가 준비되었어요.');
+    console.log(
+      `🚀  - 서버가 준비되었어요. v${process.env.npm_package_version}`,
+    );
   });
 });
 
