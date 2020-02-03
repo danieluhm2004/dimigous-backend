@@ -6,7 +6,7 @@ export default async function(message: string, phone: string) {
   if (!region) throw new Error('사용 가능한 리전이 없습니다.');
   AWS.config.update({ region: region.region });
   const SNS = new AWS.SNS({ apiVersion: '2010-03-31' });
-  phone = '82' + phone.replace(/-/g, '');
+  phone = '82' + phone.replace(/-/g, '').substr(1);
   const res = await SNS.publish({
     Message: `[${process.env.NAME || '클라우드어스'}] ${message}`,
     MessageStructure: 'string',
