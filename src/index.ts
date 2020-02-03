@@ -13,7 +13,6 @@ const app: Application = Express();
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESSKEY || '',
   secretAccessKey: process.env.AWS_SECRETKEY || '',
-  region: process.env.AWS_REGION || 'ap-northeast-1',
 });
 
 Mongoose.Promise = global.Promise;

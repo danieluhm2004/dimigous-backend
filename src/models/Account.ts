@@ -23,5 +23,5 @@ export const AccountSchema = new Schema({
   createAt: { type: Date, default: Date.now, required: true },
 });
 
-export const Account = Mongoose.model<IAccount>('Account', AccountSchema);
+export const Account = Mongoose.model<IAccount>('Accounts', AccountSchema);
 export default Account;

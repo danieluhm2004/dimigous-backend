@@ -17,5 +17,5 @@ export const StorySchema = new Schema({
   createAt: { type: Date, default: Date.now, required: true },
 });
 
-export const Story = Mongoose.model<IStory>('Story', StorySchema);
+export const Story = Mongoose.model<IStory>('Stories', StorySchema);
 export default Story;
