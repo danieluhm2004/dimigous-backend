@@ -12,7 +12,7 @@
   "dependencies": {
     "apollo-server-express": "^2.9.16",
     "aws-sdk": "^2.610.0",
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "cross-env": "^7.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
