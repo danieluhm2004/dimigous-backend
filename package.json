@@ -10,7 +10,7 @@
     "build": "rm -rf dist && tsc"
   },
   "dependencies": {
-    "apollo-server-express": "^2.9.16",
+    "apollo-server-express": "^2.14.2",
     "aws-sdk": "^2.814.0",
     "bcrypt": "^5.0.0",
     "cross-env": "^7.0.0",
